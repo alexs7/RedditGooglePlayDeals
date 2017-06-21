@@ -1,4 +1,6 @@
-# RedditGooglePlayDeals - An android app that will fetch and render any google play deals from Reddit
+# RedditGooglePlayDeals
+
+## An android app that will fetch and render any google play deals from Reddit
 
 Source used: https://www.reddit.com/r/googleplaydeals.
 

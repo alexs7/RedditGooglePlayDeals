@@ -1,5 +1,4 @@
-# RedditGooglePlayDeals - An android app that will fetch and render any
-google play deals from subreddit https://www.reddit.com/r/googleplaydeals.
+# RedditGooglePlayDeals - An android app that will fetch and render any google play deals from subreddit https://www.reddit.com/r/googleplaydeals.
 
 This tutorial was used http://www.vogella.com/tutorials/Retrofit/article.html
 

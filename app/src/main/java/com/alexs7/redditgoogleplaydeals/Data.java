@@ -50,7 +50,7 @@ public class Data{
 	private boolean locked;
 
 	@SerializedName("created_utc")
-	private double createdUtc;
+	private int createdUtc;
 
 	@SerializedName("likes")
 	private Object likes;
@@ -68,7 +68,7 @@ public class Data{
 	private String author;
 
 	@SerializedName("created")
-	private double created;
+	private int created;
 
 	@SerializedName("report_reasons")
 	private Object reportReasons;
@@ -246,7 +246,7 @@ public class Data{
 		return locked;
 	}
 
-	public double getCreatedUtc(){
+	public int getCreatedUtc(){
 		return createdUtc;
 	}
 
@@ -270,7 +270,7 @@ public class Data{
 		return author;
 	}
 
-	public double getCreated(){
+	public int getCreated(){
 		return created;
 	}
 

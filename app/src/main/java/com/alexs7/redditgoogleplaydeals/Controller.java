@@ -4,44 +4,59 @@ package com.alexs7.redditgoogleplaydeals;
  * Created by alex on 21/06/2017.
  */
 
-import com.squareup.moshi.Moshi;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-import retrofit2.converter.moshi.MoshiConverterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
-public class Controller implements Callback<List<Deal>> {
+public class Controller implements Callback<RedditResponse> {
 
     static final String BASE_URL = "https://www.reddit.com/r/";
 
     public void start(){
-        Moshi moshi = new Moshi.Builder().build();
+        Gson gson = new GsonBuilder().setLenient().create();
+
+        HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
+        // set your desired log level
+        logging.setLevel(HttpLoggingInterceptor.Level.BODY);
+        OkHttpClient.Builder httpClient = new OkHttpClient.Builder();
+        // add your other interceptors …
+        // add logging as last interceptor
+        httpClient.addInterceptor(logging);  // <-- this is the important line!
+
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .addConverterFactory(MoshiConverterFactory.create(moshi))
+                .addConverterFactory(GsonConverterFactory.create(gson))
+                .client(httpClient.build())
                 .build();
 
         RedditAPI redditAPI = retrofit.create(RedditAPI.class);
-        Call<List<Deal>> call = redditAPI.getDeals(0);
+        Call<RedditResponse> call = redditAPI.getDeals();
         call.enqueue(this);
     }
 
     @Override
-    public void onResponse(Call<List<Deal>> call, Response<List<Deal>> response) {
+    public void onResponse(Call<RedditResponse> call, Response<RedditResponse> response) {
         if(response.isSuccessful()){
-            List<Deal> deals = response.body();
-            deals.forEach( deal -> System.out.println(deal.getUrl()));
+            System.out.println("-------------->");
+            RedditResponse redditResponse = response.body();
+            System.out.println(redditResponse.getData().toString());
         }else{
+            System.out.println("<---------------");
             System.out.println(response.errorBody());
         }
     }
 
     @Override
-    public void onFailure(Call<List<Deal>> call, Throwable t) {
+    public void onFailure(Call<RedditResponse> call, Throwable t) {
         t.printStackTrace();
     }
 }

@@ -12,7 +12,7 @@ import retrofit2.http.Query;
 
 public interface RedditAPI {
 
-    @GET("googleplaydeals/") //.json?
-    Call<List<Deal>> getDeals(@Query("count") Integer count);
+    @GET("googleplaydeals/.json") //.json?
+    Call<RedditResponse> getDeals(); // getDeals(@Query("count") Integer count);
 
 }

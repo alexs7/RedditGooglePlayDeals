@@ -12,6 +12,5 @@ public class MainActivity extends AppCompatActivity {
 
         Controller controller = new Controller();
         controller.start();
-
     }
 }

@@ -4,8 +4,6 @@ package com.alexs7.redditgoogleplaydeals;
  * Created by alex on 21/06/2017.
  */
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.squareup.moshi.Moshi;
 
 import java.util.List;
